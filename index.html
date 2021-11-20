@@ -3,19 +3,21 @@
 <head>
 	<title>SoccerStat</title>
 	<meta charset="utf-8">
-	<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div id="navbar" style="background: #000;">
-		<img src="img/logo.jpg">
-		<div id="flex-row"></div>
+	<div id="app">
+		<div id="header">
+			<img src="img/logo.png">
+			<div id="navbar_item" v-for="navbar_item in navbar_items">
+				<a v-bind:href="navbar_item.href">{{navbar_item.title}}</a>
+			</div>
+		</div>
 	</div>
-
 	
 
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 
 	
 </body>

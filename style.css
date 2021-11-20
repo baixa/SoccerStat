@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+#app {
+	background: linear-gradient(#000, rgba(0,0,0,0.5));
+	height: 60vw;
+}
+#header {
+	padding: 0vw 2vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+img {
+	height: 3.5vw;
+	width: auto;
+	margin: 0.5vw;
+	margin-right: -3vw;
+}
+#navbar_item {
+	margin-top: 1.3vw;
+}
+a {
+	text-decoration: none;
+	height: 100%;
+	color: #fff;
+	font-size: 1vw;
+	font-family: "Lucida Sans Unicode";
+	padding: 0.5vw;
+}
+a:hover{
+	border-radius: 8px;
+	background-color: rgba(256,256,256,0.1);
+
+}
