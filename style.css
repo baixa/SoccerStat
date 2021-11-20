@@ -6,11 +6,11 @@
 	background: linear-gradient(#000, rgba(0,0,0,0.5));
 	height: 60vw;
 }
-#header {
+#header, #main{
 	padding: 0vw 2vw;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-between
 }
 img {
 	height: 3.5vw;
@@ -32,5 +32,16 @@ a {
 a:hover{
 	border-radius: 8px;
 	background-color: rgba(256,256,256,0.1);
-
+}
+#main {
+	height: 10vw;
+}
+.column {
+	width: 30%;
+	height: auto;
+	margin-right: 2vw; 
+	border: 1px solid #f00;
+}
+#col3 {
+	margin-right: 0;
 }
