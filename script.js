@@ -15,3 +15,13 @@ new Vue({
 
 	}
 });
+
+var x = new XMLHttpRequest();
+x.open("GET", new URL("Access-Control-Allow-Origin: https://google.com/search"));
+x.send();
+x.onload = function() {
+	alert(`Загружено: ${x.status}`);
+}
+x.onerror = function() { 
+  alert(`Ошибка соединения`);
+};

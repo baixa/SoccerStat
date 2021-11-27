@@ -6,8 +6,12 @@
 	background: linear-gradient(#000, rgba(0,0,0,0.5));
 	height: 60vw;
 }
+#footer {
+	background: linear-gradient(rgba(0,0,0,0.5), #000);
+	height: auto;
+}
 #header, #main{
-	padding: 0vw 2vw;
+	padding: 0vw 5vw;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between
@@ -44,4 +48,98 @@ a:hover{
 }
 #col3 {
 	margin-right: 0;
+}
+
+#footer {
+	padding: 0vw 5vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between
+}
+
+#row1_foot {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between
+}
+
+#row1_col1_foot {
+	width: 60%;
+}
+
+#row1_col2_foot {
+	width: 30%;
+}
+#content {
+	height: 100%;
+	color: #fff;
+	font-size: 0.8vw;
+	font-family: "Lucida Sans Unicode";
+	padding: 0.5vw;
+}
+
+#content_col2 {
+	height: auto;
+	color: #fff;
+	font-size: 0.8vw;
+	font-family: "Lucida Sans Unicode";
+	padding: 0.5vw;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.storeImg {
+	height: 2.5vw;
+	width: auto;
+	margin: 0.1vw;
+}
+
+.imgStoreLink {
+	margin-right: 1vw;
+}
+
+.social {
+	height: 3vw;
+	width: auto;
+	margin: 0.1vw;
+}
+.imgSocialLink {
+	margin-right: 2vw;
+}
+
+#row2_foot {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between
+}
+
+.row2_col {
+	width: 32%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: space-between;
+	margin: 0vw 5vw;
+}
+.row2_col > span {
+	margin-bottom: 0.8vw;
+}
+#foot_copyright {
+	margin-top: -1.5vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+#foot_copyright > p {
+	color: #fff;
+	font-size: 0.5vw;
+	font-family: "Lucida Sans Unicode";
+	padding: 0.5vw;
+}
+hr {
+	margin: 2vw 0;
 }

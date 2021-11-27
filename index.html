@@ -4,11 +4,12 @@
 	<title>SoccerStat</title>
 	<meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://api.football-data.org/v2/matches"></script>
 </head>
 <body>
 	<div id="app">
 		<div id="header">
-			<img src="img/logo.png">
+			<img src="img/logo.png" alt="logo">
 			<div id="navbar_item" v-for="navbar_item in navbar_items">
 				<a v-bind:href="navbar_item.href">{{navbar_item.title}}</a>
 			</div>
@@ -22,6 +23,50 @@
 			</div>
 			<div class="column" id="col2"></div>
 			<div class="column" id="col3"></div>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="row1_foot">
+			<div id="row1_col1_foot">
+				<img src="img/logo.png" alt="logo">
+				<div id="description">
+					<p id="content">
+						SoccerStat обслуживает более 60 миллионов любителей спорта по всему миру 2013 года. Мы гордимся тем, что сообщаем самые быстрые и точные новости о реальном времени в Интернете. В сфере футбола мы предоставляем информацию о календаре и результатах игр, командах и таблицах лиг, статистику матчей в реальном времени, коэффициенты и сроки проведения более 1000 соревнований по всему миру. От чемпионата мира по футболу и лиг чемпионов до ваших местных лиг второго и третьего уровня - мы поможем вам узнать всю информацию.
+					</p>
+				</div>
+			</div>
+			<div id="row1_col2_foot">
+				<p id="content_col2">Получите все функции для мобильного устройства:</p>
+				<div class="row">
+					<a href="#" class="imgStoreLink"><img src="img/gp.png" alt="GooglePlay" class="storeImg"></a>
+					<a href="#"><img src="img/as.png" alt="AppStore" class="storeImg"></a>
+				</div>
+				<p id="content_col2">Следуйте за нами:</p>
+				<div class="row">
+					<a href="#" class="imgSocialLink"><img src="img/facebook1.png" alt="Facebook" class="social"></a>
+					<a href="#" class="imgSocialLink"><img src="img/instagram.png" alt="Instagram" class="social"></a>
+					<a href="#" class="imgSocialLink"><img src="img/twitter.png" alt="Twitter" class="social"></a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div id="row2_foot">
+			<div class="row2_col">
+				<span class="span_foot"><a href="#" class="footer_link">О нас</a><br></span>
+				<span class="span_foot"><a href="#" class="footer_link">Вакансии</a><br></span>
+			</div>
+			<div class="row2_col">
+				<span class="span_foot"><a href="#" class="footer_link">Политика конфиденциальности</a><br></span>
+				<span class="span_foot"><a href="#" class="footer_link">Наши контакты</a><br></span>
+			</div>
+			<div class="row2_col">
+				<span class="span_foot"><a href="#" class="footer_link">Рекламировать</a><br></span>
+				<span class="span_foot"><a href="#" class="footer_link">Условия пользования</a><br></span>
+			</div>
+		</div>
+		<hr>
+		<div id="foot_copyright">
+			<p>Copyright © 2021 SoccerStat.com / Все права защищены</p>
 		</div>
 	</div>
 	
