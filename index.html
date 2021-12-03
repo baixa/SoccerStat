@@ -4,7 +4,6 @@
 	<title>SoccerStat</title>
 	<meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="https://api.football-data.org/v2/matches"></script>
 </head>
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -12,7 +11,7 @@
 		<div id="header">
 			<img src="img/logo.png" alt="logo">
 			<div id="navbar_item" v-for="navbar_item in navbar_items">
-				<a v-bind:href="navbar_item.href">{{navbar_item.title}}</a>
+				<a v-bind:href="navbar_item.href" v-bind:onclick="navbar_item.onclick">{{navbar_item.title}}</a>
 			</div>
 		</div>
 		<div id="main">

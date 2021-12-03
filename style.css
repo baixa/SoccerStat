@@ -4,7 +4,7 @@
 }
 #app {
 	background: linear-gradient(#000, rgba(0,0,0,0.5));
-	height: 60vw;
+	height: 200vw;
 }
 #footer {
 	background: linear-gradient(rgba(0,0,0,0.5), #000);
@@ -44,8 +44,14 @@ a:hover{
 	margin-right: 0;
 	width: 30%;
 	height: auto; 
-	border: 1px solid #f00;
+	/*border: 1px solid #f00;*/
 	margin: 0vw 30vw;	
+	text-decoration: none;
+	height: 100%;
+	color: #fff;
+	font-size: 1vw;
+	font-family: "Lucida Sans Unicode";
+	padding: 0.5vw;
 }
 
 #footer {
@@ -141,6 +147,4 @@ a:hover{
 hr {
 	margin: 2vw 0;
 }
-#JSON_Test{
-	color: #fff;
-}
+
