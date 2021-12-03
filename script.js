@@ -16,12 +16,11 @@ new Vue({
 	}
 });
 
-var x = new XMLHttpRequest();
-x.open("GET", new URL("Access-Control-Allow-Origin: https://google.com/search"));
-x.send();
-x.onload = function() {
-	alert(`Загружено: ${x.status}`);
-}
-x.onerror = function() { 
-  alert(`Ошибка соединения`);
-};
+$.ajax({
+  headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
+  url: "http://api.football-data.org/v2/competitions/PL/matches",
+  dataType: 'json',
+  type: 'GET',
+}).done(function(response) {
+  console.log(response);
+});

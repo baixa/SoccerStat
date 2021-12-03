@@ -40,14 +40,12 @@ a:hover{
 #main {
 	height: 10vw;
 }
-.column {
-	width: 30%;
-	height: auto;
-	margin-right: 2vw; 
-	border: 1px solid #f00;
-}
-#col3 {
+#col {
 	margin-right: 0;
+	width: 30%;
+	height: auto; 
+	border: 1px solid #f00;
+	margin: 0vw 30vw;	
 }
 
 #footer {
@@ -142,4 +140,7 @@ a:hover{
 }
 hr {
 	margin: 2vw 0;
+}
+#JSON_Test{
+	color: #fff;
 }
