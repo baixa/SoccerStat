@@ -5,16 +5,22 @@
 #app {
 	background: #222;
 	height: auto;
-	min-height: 24.15vw;
+	min-height: 70vh;
 }
 #footer {
 	background: #222;
 	height: auto;
 }
-#header, #main{
+#header{
 	padding: 0vw 5vw;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between
+}
+#main{
+	padding: 0vw 5vw;
+	display: flex;
+	flex-direction: column;
 	justify-content: space-between
 }
 img {
@@ -153,6 +159,8 @@ hr {
 	margin-bottom: 3vw;
 	text-align: center;
 	height: auto;
+	font-family: "Lucida Sans Unicode";
+	cursor: pointer;
 }
 .imgTeams {
 	margin: 0vw 1vw 0vw -4vw;
@@ -166,9 +174,11 @@ hr {
 	border-radius: 10px;
 	margin: 1vw 0vw 1vw 9vw;
 	text-align: center;
+	font-family: "Lucida Sans Unicode";
 }
 .matchDescription {
 	text-align: center;
+	font-family: "Lucida Sans Unicode";
 }
 .resultMatch{
 	width: 5vw;
@@ -176,7 +186,33 @@ hr {
 	border: 1px solid #aaa;
 	border-radius: 10px;
 	margin: 1vw 0vw 1vw 10.5vw;
+	font-family: "Lucida Sans Unicode";
 	text-align: center;
 	background: #bbb;
 	color: #000;
+	font-weight: bold;
+}
+#formDate {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+input[type=date]{
+    background:  #aaa;
+    margin-right: 3vw;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+	font-family: "Lucida Sans Unicode";
+    font-size: 1.2vw;
+}
+button {
+	background:  #222;
+    margin-right: 3vw;
+    border-radius: 10px;
+    border: 1px solid #fff;
+	font-family: "Lucida Sans Unicode";
+    font-size: 1.2vw;
+    width: 6.5vw;
+    color: #fff;
+    cursor: pointer;
 }

@@ -26,8 +26,6 @@ $.ajax({
   type: 'GET',
 }).done(function(response) {
 	teams = response;
-	console.log(response);
-	console.log('Succesfully download!');
 });
 $.ajax({
   headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
@@ -36,8 +34,6 @@ $.ajax({
   type: 'GET',
 }).done(function(response) {
 	competitions = response;
-	console.log(response);
-	console.log('Succesfully download!');
 });
 
 
@@ -45,15 +41,26 @@ function listTeamsClick() {
 	var main = document.querySelector("#main");
 	var resultHTML = "<div class='column' id='col'>";
 	for(var i = 0; i < 10; i++) {
-		resultHTML  = resultHTML + "<div class='teamsRef'><img class='imgTeams' src='" + teams['teams'][i]['crestUrl'] + "' alt='" + teams['teams'][i]['name'] + "'><a onclick='teamGames(" + teams['teams'][i]['id'] + ")'>" + teams['teams'][i]['name'] + "</a></div>";
+		resultHTML += "<div class='teamsRef'><img class='imgTeams' src='" + teams['teams'][i]['crestUrl'] + "' alt='" + teams['teams'][i]['name'] + "'><a onclick='teamGames(" + teams['teams'][i]['id'] + ")'>" + teams['teams'][i]['name'] + "</a></div>";
 	}
 	resultHTML += "</div>"
 	main.innerHTML = resultHTML;
 }
 
 function teamGames(teamCode) {
+	teamCode = teamCode + "";
 	var main = document.querySelector("#main");
 	var games = []
+
+	var elDateBegin = document.querySelector('#start');
+	var dateBegin = new Date((elDateBegin === null? '2021-12-01' : elDateBegin.value));
+	var elDateEnd = document.querySelector('#end');
+	var dateEnd = new Date((elDateEnd === null? '2021-12-10' : elDateEnd.value));
+
+	main.innerHTML =  `<div id='formDate'><input type='date' id='start' required name='date-start' value='` + dateBegin.toISOString().substring(0,10) 
+		+ `' ` + 
+		` min='2021-01-01' max='2022-12-31'><input type='date' id='end' name='date-end' value='` + dateEnd.toISOString().substring(0,10) + `'` + 
+		` min='2021-01-01' max='2022-12-31'><button id='btnDate' onclick='teamGames("` + teamCode + `")'>Показать</button></div>`;
 
 	$.ajax({
 	  headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
@@ -62,12 +69,14 @@ function teamGames(teamCode) {
 	  type: 'GET',
 	}).done(function(response) {
 		games = response;
-		console.log(games);
 		var resultHTML = "<div class='column' id='col'>";
 		for(var i = 5; i < 25; i++) {
 			var gameDate = new Date(games['matches'][i]['utcDate']);
+			if (gameDate > dateEnd || gameDate < dateBegin) {
+				continue;
+			}
 			var year = gameDate.getFullYear();
-			var month = gameDate.getMonth();
+			var month = gameDate.getMonth() + 1;
 			var day = gameDate.getDate();
 			var hour = gameDate.getHours();
 			var minute = gameDate.getMinutes();
@@ -85,15 +94,15 @@ function teamGames(teamCode) {
 			resultHTML += "</div>"
 		}
 		resultHTML += "</div>"
-		main.innerHTML = resultHTML;
+		main.innerHTML = main.innerHTML + resultHTML;
 	});
 }
 
 function listLeguesClick() {
 	var main = document.querySelector("#main");
 	var resultHTML = "<div class='column' id='col'>";
-	for(var i = 40; i < 65; i++) {
-		if (competitions['competitions'][i]['code'] != null && competitions['competitions'][i]['code'].length > 0) {
+	for(var i = 0; i < 125; i++) {
+		if (competitions['competitions'][i]['plan'] == 'TIER_ONE') {
 			resultHTML  = resultHTML + `<div class='compRef'><a onclick="compGames('` + 
 			competitions['competitions'][i]['code'] + `')">` + 
 			competitions['competitions'][i]['name'] + "</a></div>";
@@ -105,8 +114,17 @@ function listLeguesClick() {
 
 function compGames(code) {
 	var main = document.querySelector("#main");
-	var games = []
+	var games = [];
 	code = code + "";
+
+	var elDateBegin = document.querySelector('#start');
+	var dateBegin = new Date((elDateBegin === null? '2021-12-01' : elDateBegin.value));
+	var elDateEnd = document.querySelector('#end');
+	var dateEnd = new Date((elDateEnd === null? '2021-12-10' : elDateEnd.value));
+
+	main.innerHTML =  `<div id='formDate'><input type='date' id='start' required name='date-start' value='` + dateBegin.toISOString().substring(0,10) + `' ` + 
+		` min='2021-01-01' max='2022-12-31'><input type='date' id='end' name='date-end' value='` + dateEnd.toISOString().substring(0,10) + `'` + 
+		` min='2021-01-01' max='2022-12-31'><button id='btnDate' onclick='compGames("` + code + `")'>Показать</button></div>`;
 
 	$.ajax({
 	  headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
@@ -115,12 +133,15 @@ function compGames(code) {
 	  type: 'GET',
 	}).done(function(response) {
 		games = response;
-		console.log(games);
 		var resultHTML = "<div class='column' id='col'>";
-		for(var i = 5; i < 25; i++) {
+		for(var i = 0; i < games['matches'].length; i++) {
 			var gameDate = new Date(games['matches'][i]['utcDate']);
+			var today = new Date();
+			if (gameDate > dateEnd || gameDate < dateBegin) {
+				continue;
+			}
 			var year = gameDate.getFullYear();
-			var month = gameDate.getMonth();
+			var month = gameDate.getMonth() + 1;
 			var day = gameDate.getDate();
 			var hour = gameDate.getHours();
 			var minute = gameDate.getMinutes();
@@ -137,7 +158,11 @@ function compGames(code) {
 			}
 			resultHTML += "</div>"
 		}
+		if (!resultHTML.includes('matchesRef')) {
+			resultHTML += "<div class='matchesRef'><p class='matchDescription'>В ближайшее время " +
+			"матчи данной лиги не проводятся</p></div>";
+		}
 		resultHTML += "</div>"
-		main.innerHTML = resultHTML;
+		main.innerHTML = main.innerHTML + resultHTML;
 	});
 }
