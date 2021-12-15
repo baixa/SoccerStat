@@ -28,6 +28,7 @@ function readTextFile(file)
             if(rawFile.status === 200 || rawFile.status == 0)
             {
                 apikey = rawFile.responseText;
+                console.log("flag");
             }
         }
     }
