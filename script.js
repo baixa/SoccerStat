@@ -15,31 +15,11 @@ const idElem = searchString.get('code');
 const paramDateBegin = searchString.get('dateBegin');
 const paramDateEnd = searchString.get('dateEnd');
 
-const apikey = readTextFile("api.txt");
-
-function readTextFile(file)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                apikey = rawFile.responseText;
-                console.log("flag");
-            }
-        }
-    }
-    rawFile.send(null);
-}
-
 var teams = []
 var competitions = []
 
 $.ajax({
-  headers: { 'X-Auth-Token': apikey },
+  headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
   url: "https://api.football-data.org/v2/teams",
   dataType: 'json',
   type: 'GET',
