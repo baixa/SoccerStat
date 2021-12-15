@@ -1,31 +1,49 @@
 new Vue({
-	el: '#app',
+	el: '#header',
 	data: {
 		navbar_items: [
-			{title: 'Список лиг', href:'#', onclick:'listLeguesClick()'},
-			{title: 'Список команд', href:'#', onclick:'listTeamsClick()'},
+			{title: 'Список лиг', href:'index.html?type=leagues'},
+			{title: 'Список команд', href:'index.html?type=teams'},
 		]
-	},
-	methods: {
-
-	},
-	computed: {
-
 	}
 });
 
+const searchString = new URLSearchParams(window.location.search);
+
+const type = searchString.get('type');
+const idElem = searchString.get('code');
+const paramDateBegin = searchString.get('dateBegin');
+const paramDateEnd = searchString.get('dateEnd');
+
+const apikey = readTextFile("api.txt");
+
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                apikey = rawFile.responseText;
+            }
+        }
+    }
+    rawFile.send(null);
+}
 
 var teams = []
 var competitions = []
 
-
 $.ajax({
-  headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
+  headers: { 'X-Auth-Token': apikey },
   url: "https://api.football-data.org/v2/teams",
   dataType: 'json',
   type: 'GET',
 }).done(function(response) {
-	teams = response;
+	teams = Object.assign({}, response);
 });
 $.ajax({
   headers: { 'X-Auth-Token': 'f3f3dad5142049a481c69a81fdda3d0d' },
@@ -33,15 +51,49 @@ $.ajax({
   dataType: 'json',
   type: 'GET',
 }).done(function(response) {
-	competitions = response;
+	competitions = Object.assign({}, response);
 });
 
+if(type != null){
+	if(idElem == null){
+		setTimeout(() => 
+			{ 
+				if(type == "leagues"){
+					listLegues();
+				}
+				else if (type == "teams"){
+					listTeams();
+				}
+			}, 1500);
+	}
+	else{
+		if(type == "leagues"){
+			compGames(competitions['competitions'][idElem]['code']);
+		}
+		else if (type == "teams"){
+			setTimeout(() => 
+			{ 
+				teamGames(teams['teams'][idElem]['id']);
+			}, 1500);
+		}
+	}	
+	showLoadImg();
+}
 
-function listTeamsClick() {
+function showLoadImg(){
+	var main = document.querySelector("#main");
+	var resultHTML = "<div id='loader-div'><div class='loader loader-img'></div></div>";
+	main.innerHTML = resultHTML;
+}
+
+function listTeams() {
 	var main = document.querySelector("#main");
 	var resultHTML = "<div class='column' id='col'>";
 	for(var i = 0; i < 10; i++) {
-		resultHTML += "<div class='teamsRef'><img class='imgTeams' src='" + teams['teams'][i]['crestUrl'] + "' alt='" + teams['teams'][i]['name'] + "'><a onclick='teamGames(" + teams['teams'][i]['id'] + ")'>" + teams['teams'][i]['name'] + "</a></div>";
+		resultHTML += "<div class='teamsRef'><img class='imgTeams' src='" + 
+		teams['teams'][i]['crestUrl'] + "' alt='" + teams['teams'][i]['name'] + 
+		"'><a href='index.html?type=teams&code=" + i + "'>" + 
+		teams['teams'][i]['name'] + "</a></div>";
 	}
 	resultHTML += "</div>"
 	main.innerHTML = resultHTML;
@@ -98,14 +150,13 @@ function teamGames(teamCode) {
 	});
 }
 
-function listLeguesClick() {
+function listLegues() {
 	var main = document.querySelector("#main");
 	var resultHTML = "<div class='column' id='col'>";
 	for(var i = 0; i < 125; i++) {
 		if (competitions['competitions'][i]['plan'] == 'TIER_ONE') {
-			resultHTML  = resultHTML + `<div class='compRef'><a onclick="compGames('` + 
-			competitions['competitions'][i]['code'] + `')">` + 
-			competitions['competitions'][i]['name'] + "</a></div>";
+			resultHTML  = resultHTML + `<div class='compRef'><a href='index.html?type=teams&code=` + 
+			i + `'>` + competitions['competitions'][i]['name'] + "</a></div>";
 		}
 	}
 	resultHTML += "</div>"
@@ -166,3 +217,4 @@ function compGames(code) {
 		main.innerHTML = main.innerHTML + resultHTML;
 	});
 }
+

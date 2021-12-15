@@ -216,3 +216,56 @@ button {
     color: #fff;
     cursor: pointer;
 }
+
+
+
+/* Стили для анимации загрузки страницы  */
+
+.loader {
+  position: relative;
+  display: inline-block;
+  margin-top: 2vw;
+  margin-left:  45vw;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  
+  animation: spin 0.75s infinite linear;
+}
+.loader::before,
+.loader::after {
+  left: -2px;
+  top: -2px;
+  display: none;
+  position: absolute;
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: inherit;
+  border-radius: inherit;
+}
+
+.loader-img,
+.loader-img::before,
+.loader-img::after {
+  display: inline-block;
+  border-color: transparent;
+  border-top-color: #fff;
+  animation-duration: 1.2s;
+}
+.loader-img::before {
+  transform: rotate(120deg);
+}
+.loader-img::after {
+  transform: rotate(240deg);
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+}
